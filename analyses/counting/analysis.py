@@ -23,29 +23,29 @@ def run(data_dir):
         email_adr = occurance.text
         result_details['email'][email_adr] = email_adr
 
-    result['n_emails'] = len(result['email'])
+    result['n_emails'] = len(result_details['email'])
 
 
     # Hostnames - IP addresses
-    h = parsed_data.findall('host')
+    occurances = parsed_data.findall('host')
 
-    for n in h:
-        host_name = n.find('ip').text
-        ip_adr = n.find('hostname').text
+    for occurance in occurances:
+        host_name = occurance.find('ip').text
+        ip_adr = occurance.find('hostname').text
         result_details['Host_name'][host_name] = ip_adr
 
-    result['n_hostnames'] = len(result['Host_name'])
+    result['n_hostnames'] = len(result_details['Host_name'])
 
 
     # VirtualHosts - IP addresses
-    vh = parsed_data.findall('vhost')
+    occurances = parsed_data.findall('vhost')
 
-    for m in vh:
-        vhost_name = m.find('hostname').text
-        ip_adr_v = m.find('ip').text
+    for occurance in occurances:
+        vhost_name = occurance.find('hostname').text
+        ip_adr_v = occurance.find('ip').text
         result_details['Virtual_Host_name'][vhost_name] = ip_adr_v
 
-    result['n_virtual_hostnames'] = len(result['Virtual_Host_name'])
+    result['n_virtual_hostnames'] = len(result_details['Virtual_Host_name'])
 
     # TLD
     t = parsed_data.findall('tld')
