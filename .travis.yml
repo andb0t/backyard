@@ -14,4 +14,4 @@ install:
 script:
   - shellcheck **/*.sh
   - flake8 **/*.py
-  - pylint **/*.py
+  # - pylint **/*.py
