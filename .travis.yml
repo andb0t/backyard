@@ -8,8 +8,10 @@ before_install:
 
 install:
   - "pip install flake8"
+  - "pip install pylint"
   - "sudo apt install shellcheck"
 
 script:
   - shellcheck **/*.sh
   - flake8 **/*.py
+  - pylint **/*.py
