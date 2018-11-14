@@ -8,7 +8,7 @@ def run(data_dir):
 
     print('Opening datafile in ' + data_dir)
 
-    file_name = 'myresults.xml'
+    file_name = 'data_theharvester.xml'
     full_file = os.path.abspath(os.path.join(data_dir, file_name))
 
     parsed_data = ElementTree.parse(full_file)
