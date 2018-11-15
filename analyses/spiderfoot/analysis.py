@@ -154,19 +154,19 @@ def run(data_dir):
     """Call the analysis."""
     print('Opening datafile in ' + data_dir)
 
+    result = {}
+
     file_name = 'data_spiderfoot.csv'
     csv_file = os.path.abspath(os.path.join(data_dir, file_name))
     try:
-        data_frame = pd.read_csv(csv_file, parse_dates=['Last Seen'], engine='python')
+        data_frame = pd.read_csv(csv_file, engine='python')
     except pd.errors.EmptyDataError:
         print('No data in ' + csv_file + ' ! Abort.')
         return {}
 
     # get data by SpiderFoot modules
-    result_name = get_module(data_frame, "sfp_names")
-    result_dns = get_module(data_frame, "sfp_dnsresolve")
-
-    result = json.dumps([result_name, result_dns], indent=4)
+    result['result_name'] = get_module(data_frame, "sfp_names")
+    result['result_dns'] = get_module(data_frame, "sfp_dnsresolve")
 
     print(json.dumps(result, indent=4))
 
