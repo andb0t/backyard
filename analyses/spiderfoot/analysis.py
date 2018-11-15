@@ -1,5 +1,6 @@
 """The analysis result for SpiderFoot."""
 import json
+import os
 import sys
 
 import pandas as pd
@@ -153,10 +154,8 @@ def run(data_dir):
     """Call the analysis."""
     print('Opening datafile in ' + data_dir)
 
-    with open(data_dir + '/paths.json') as file:
-        json_data = json.load(file)
-
-    csv_file = data_dir + '/' + json_data['data']['file']
+    file_name = 'data_spiderfoot.csv'
+    csv_file = os.path.abspath(os.path.join(data_dir, file_name))
     data_frame = pd.read_csv(csv_file, parse_dates=['Last Seen'], engine='python')
 
     # get data by SpiderFoot modules

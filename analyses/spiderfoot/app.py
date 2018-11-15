@@ -55,5 +55,5 @@ def do_analysis():
 
 
 if __name__ == '__main__':
-    _port = int(os.environ.get('PORT', 5004))
+    _port = int(os.environ.get('PORT', 5010))
     app.run(host='0.0.0.0', port=_port)
