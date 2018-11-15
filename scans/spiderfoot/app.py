@@ -18,7 +18,7 @@ app = flask.Flask(__name__)
 def get_spiderfoot_result():
     """Call TheHarvester."""
     # register modules
-    modules = ['sfp_pwned', 'sfp_phishtank', 'sfp_pastebin']
+    modules = ['sfp_pwned', 'sfp_phishtank', 'sfp_pastebin', 'sfp_names', 'sfp_dnsresolve']
 
     def html_target(name="SCAN_SPIDERFOOT_SERVER"):
         # for now just copied from master
