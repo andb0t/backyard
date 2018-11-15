@@ -156,7 +156,11 @@ def run(data_dir):
 
     file_name = 'data_spiderfoot.csv'
     csv_file = os.path.abspath(os.path.join(data_dir, file_name))
-    data_frame = pd.read_csv(csv_file, parse_dates=['Last Seen'], engine='python')
+    try:
+        data_frame = pd.read_csv(csv_file, parse_dates=['Last Seen'], engine='python')
+    except pd.errors.EmptyDataError:
+        print('No data in ' + csv_file + ' ! Abort.')
+        return {}
 
     # get data by SpiderFoot modules
     result_name = get_module(data_frame, "sfp_names")
