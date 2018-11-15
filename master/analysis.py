@@ -35,7 +35,7 @@ def collect_results(analyses, form_data):
 
 def perform_analysis(form_data):
     """Call the analyses."""
-    _analyses = ['data_statistics', 'dummy', 'counting']
+    _analyses = ['data_statistics', 'dummy', 'counting', 'spiderfoot']
 
     _cid = form_data['id']
 

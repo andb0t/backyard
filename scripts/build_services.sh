@@ -19,6 +19,7 @@ echo "Build the analyses ..."
 docker build -t analysis_data_statistics_image analyses/data_statistics
 docker build -t analysis_dummy_image analyses/dummy
 docker build -t analysis_counting_image analyses/counting
+docker build -t analysis_spiderfoot_image analyses/spiderfoot
 
 echo "Build the master ..."
 docker build -t master_image master

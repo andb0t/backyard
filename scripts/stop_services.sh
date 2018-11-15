@@ -11,6 +11,8 @@ scan_cve_container \
 scan_wapiti_container \
 analysis_data_statistics_container \
 analysis_dummy_container \
+analysis_counting_container \
+analysis_spiderfoot_container \
 master_container \
 frontend_container \
 nats_container
