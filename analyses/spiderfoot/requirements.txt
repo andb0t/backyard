@@ -1,4 +1,4 @@
 Flask
 tqdm
 pandas
-spacy
+spacy==2.0.3

@@ -4,12 +4,12 @@ FROM python:3.6
 COPY requirements.txt /
 WORKDIR /
 RUN pip install -r requirements.txt
-# add required models after the package installation
-RUN python -m spacy download en
-RUN python -m spacy download de
 
 # now add the rest
 ENV TZ=Europe/Berlin
+# add required models after the package installation
+RUN python -m spacy download en
+RUN python -m spacy download de
 
 COPY app.py /
 COPY analysis.py /
