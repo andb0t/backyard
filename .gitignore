@@ -5,3 +5,7 @@ __pycache__
 scans/*/download
 .idea
 venv
+api/build
+
+# server
+nohup.out
