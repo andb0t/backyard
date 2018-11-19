@@ -34,7 +34,7 @@ async def create(request):  # noqa: E501
         resp.ParseFromString(response.data)
         print("Received response: {message}".format(
             message=resp))
-        return web.json_response(MessageToJson(resp))
+        return web.Response(text=MessageToJson(resp), content_type="application/json")
     except ErrTimeout:
         raise web.HTTPGatewayTimeout(reason='Request timed out')
 
@@ -83,7 +83,7 @@ async def read(id):  # noqa: E501
     if document is None:
         raise web.HTTPNotFound(reason='Analysis not found')
 
-    return web.json_response(document, dumps=dumps)
+    return web.Response(text=dumps, content_type="application/json")
 
 
 async def list_analyses():
@@ -93,7 +93,7 @@ async def list_analyses():
     for a in await cursor.to_list(length=100):
         result.append(a)
 
-    return web.json_response(result, dumps=dumps)
+    return web.Response(text=dumps, content_type="application/json")
 
 
 async def read_result(request_ctx, id):  # noqa: E501

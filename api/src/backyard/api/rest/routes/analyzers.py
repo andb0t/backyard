@@ -22,6 +22,6 @@ async def list():  # noqa: E501
         resp = api.ListAnalyzerResponse()
         resp.ParseFromString(response.data)
         logger.debug("Received response: {message}".format(message=resp))
-        return web.json_response(MessageToJson(resp))
+        return web.Response(text=MessageToJson(resp), content_type="application/json")
     except ErrTimeout:
         raise web.HTTPGatewayTimeout(reason='Request timed out')
