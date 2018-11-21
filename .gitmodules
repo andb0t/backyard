@@ -1,0 +1,9 @@
+[submodule "src/backyard/api/proto"]
+	path = src/backyard/api/proto
+	url = https://github.com/cyber-fighters/proto.git
+[submodule "templates/scanner/example/src/backyard/api/proto"]
+	path = templates/scanner/example/src/backyard/api/proto
+	url = https://github.com/cyber-fighters/proto.git
+[submodule "templates/analyzer/example/src/backyard/api/proto"]
+	path = templates/analyzer/example/src/backyard/api/proto
+	url = https://github.com/cyber-fighters/proto.git
