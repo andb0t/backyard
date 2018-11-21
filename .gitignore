@@ -6,6 +6,8 @@ scans/*/download
 .idea
 venv
 api/build
+*egg*
+.env
 
 # server
 nohup.out

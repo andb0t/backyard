@@ -1,78 +1,68 @@
-# Backyard
+# API example using proto files
 
 
-## Todo:
-- Deploy on AWS or Heroku
-- Migrate to Kubernetes
+## Local development setup
 
+### Prerequisites
 
-## Setup
-Run the setup scripts, depending on your needs:
-```bash
-./scripts/pull_images.sh
-./scripts/build_services.sh
-./scripts/start_services.sh
-./scripts/stop_services.sh
+To run a local, non *kubernetes* development installation, you need these local accessible components:
+
+ * [Docker](https://www.docker.com/get-started)
+ * [NATS](https://github.com/nats-io/gnatsd/releases)
+ * [MongoDB](https://www.mongodb.com/download-center/community)
+
+Start *NATS* via `gnatsd`. Run *MongoDB* using `mkdir -p /tmp/db && mongodb --dbpath /tmp/db`.
+
+### Initialize submodules
 ```
-Restart one or more containers with
-```bash
-./scripts/restart_service.sh SERVICE [SERVICE...]
-```
-
-## Execution
-
-Visit http://localhost:8080/ with your browser
-
-
-## Misc
-
-### NATS
-
-Visit http://localhost:8222/ to monitor the NATS server
-
-### Storage
-Peek into the storage volume:
-```bash
-docker run -it --rm --volumes-from storage_container storage_image ls /data
+git submodule init --update
 ```
 
-Remove the container with
-```bash
-docker rm -v storage_container
+### Build components
+
+Build main processes (API server and Supervisor):
+
+```
+pipenv install --skip-lock
+pipenv shell
+./setup.py develop
 ```
 
+Build example scanner in `templates/scanner/example`:
 
-### Scanners
-* set up spiderfoot container with
-  ```bash
-  docker build -t scan_spiderfoot_image scans/spiderfoot/download
-  docker run -d -it -p 5001:5001 --rm --volumes-from storage_container --name scan_spiderfoot_server scan_spiderfoot_image
-  ```
-  then set up sidecar with
-  ```bash
-  docker build -t scan_spiderfoot_sidecar_image scans/spiderfoot
-  docker run -it --rm --volumes-from storage_container --link scan_spiderfoot_server:scan_spiderfoot --name scan_spiderfoot_sidecar scan_spiderfoot_sidecar_image
-  ```
-  Check scans directly via http://localhost:5001/
-* theharvester: See setup scripts
-
-
-
-### Frontend
-Peek inside
-```bash
-docker run -it --rm --link master_container:master frontend_image --name frontend_container bash
-env  # see available environmental variables, amongst others the master info
-ping master  # ping [IP_ADDRESS]
-curl --data "url=www.bash.com" 172.17.0.2:5000/request/ # test master
 ```
-Use it on http://localhost:8080/
-
-Check networking on docker with `docker network inspect bridge`
-
-
-### Clean up
-Remove all containers and their associated volumes:
-```bash
-docker rm -v $(docker ps -qa)
+docker build -t backyard/scanner-example:latest .
 ```
+
+Build example analyzer in `templates/analyzer/example`:
+
+```
+docker build -t backyard/analyzer-example:latest .
+```
+
+### Running the service
+
+The *supervisor* contains logic to start scanners and analyzers and sits right on top of
+*NATS* to serve the requests. Start it using:
+
+```
+backyard-supervisor
+```
+
+The *api* server exposes the swagger defined API to an unencrypted local HTTP service. Make
+sure that this is i.e. proxied by an SSL enabled *nginx* instance if made public.
+
+```
+backyard-api
+```
+
+You can now start the `EXAMPLE` analysis using the API (i.e. via the swagger interface).
+
+## Exploring the API
+Default credentials: admin/secret
+
+### Swagger endpoint
+URL: http://localhost:8080/v1/ui/
+
+### UI endpoint
+URL: http://localhost:8080/v1
