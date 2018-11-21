@@ -6,6 +6,7 @@ import logging
 from logging.config import dictConfig
 from nats.aio.client import Client as NATS
 from nats.aio.errors import ErrConnectionClosed, ErrTimeout, ErrNoServers
+import os
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -44,8 +45,9 @@ async def run(loop):
 
     # Connect to nats
     try:
-        logger.debug('connecting to nats server...')
-        await nc.connect("localhost:4222", loop=loop)
+        address = os.getenv('NATS', "localhost:4222")
+        logger.debug('connecting to nats server on %s ...' % address)
+        await nc.connect(address, loop=loop)
     except ErrNoServers as e:
         logger.error('failed to connect to nats', e)
         return
@@ -59,7 +61,7 @@ def main():
 
     server = RestServer()
     server.start(port=8080)
-
+    logger.debug('started.')
 
 if __name__ == "__main__":
     main()
