@@ -12,14 +12,11 @@ import requests
 
 app = flask.Flask(__name__)
 
-
-
 @app.route('/', methods=['POST'])
 def get_spiderfoot_result():
-    """Call TheHarvester."""
+    """Call SpiderFoot."""
     # register modules
     modules = ['sfp_pwned', 'sfp_phishtank', 'sfp_pastebin', 'sfp_names', 'sfp_dnsresolve']
-
     def html_target(name="SCAN_SPIDERFOOT_SERVER"):
         # for now just copied from master
         # TODO: find way to use functions from other dir in docker container and use the html_target function there
@@ -33,6 +30,15 @@ def get_spiderfoot_result():
         # _addr = os.environ["{}_PORT_{}_TCP_ADDR".format(name.upper(), _port)]
         return "http://{}:{}/".format(_addr, _port)
 
+    def get_valid_url(url):
+        """Format the url to be accepted by SpiderFoot server"""
+        regex = re.compile(r"http://(.*)")
+        finding = regex.search(url)
+        if finding is not None:
+            return finding.group(1)
+
+        return url
+
     print("Calling the spiderfoot server to analyse {} using those modules:".format(flask.request.form['url']))
     for module in modules:
         print("- " + module)
@@ -40,8 +46,9 @@ def get_spiderfoot_result():
     # run it
     sf_modules = ','.join(modules)
     print('Posting requests to ' + html_target() + ' ...')
+    url = get_valid_url(flask.request.form['url'])
     payload = {'scanname': flask.request.form['id'],
-               'scantarget': flask.request.form['url'],
+               'scantarget': url,
                'usecase': 'all',
                'modulelist': sf_modules,
                'typelist': ''}
