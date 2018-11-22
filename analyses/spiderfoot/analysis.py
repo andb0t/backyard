@@ -90,10 +90,10 @@ def get_mapped_data(data_frame, module_name, data_type, reverse=False):
     data = data_frame.loc[(data_frame['Module'] == module_name) & (data_frame['Type'] == data_type)]
 
     series = None
-    if not reverse:
-        series = pd.Series(data['Data'].tolist(), index=data['Source'])
-    else:
+    if reverse:
         series = pd.Series(data['Source'].tolist(), index=data['Data'])
+    else:
+        series = pd.Series(data['Data'].tolist(), index=data['Source'])
 
     return series
 
@@ -114,10 +114,20 @@ def get_data(data_frame, module_name, data_type):
     # sfp_dnsresolve
     if module_name == 'sfp_dnsresolve':
         if data_type == 'IP_ADDRESS':
-            data = get_mapped_data(data_frame, module_name, data_type)
+            data = get_mapped_data(data_frame, module_name, data_type, True)
 
         if data_type == 'AFFILIATE_INTERNET_NAME':
             # Notice: value from this type looks like a IP-Host mapping but why it is affilicated?
+            data = get_mapped_data(data_frame, module_name, data_type)
+
+    # sfp_pastebin
+    if (module_name == 'sfp_pastebin'):
+        if (data_type == 'LEAKSITE_CONTENT'):
+            # site content found on pastebins (pure text storage on internet)
+            data = get_mapped_data(data_frame, module_name, data_type)
+
+        if(data_type == 'LEAKSITE_URL'):
+            # site url found on pastebins (including query parameters etc.)
             data = get_mapped_data(data_frame, module_name, data_type, True)
 
     if data is not None:
@@ -165,8 +175,11 @@ def run(data_dir):
         return {}
 
     # get data by SpiderFoot modules
-    result['result_name'] = get_module(data_frame, "sfp_names")
-    result['result_dns'] = get_module(data_frame, "sfp_dnsresolve")
+    modules = ["sfp_names", "sfp_dnsresolve", "sfp_pastebin"]
+    for module_name in modules:
+        data = get_module(data_frame, module_name)
+        if (data is not None):
+            result[module_name] = data
 
     print(json.dumps(result, indent=4))
 
