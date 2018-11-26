@@ -6,3 +6,4 @@ analyzer:
   image: "backyard/analyzer-example:latest"
   scanners:
   - EXAMPLE
+  - THEHARVESTER
