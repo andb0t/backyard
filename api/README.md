@@ -5,6 +5,8 @@
 
 ### Prerequisites
 
+This does not run on windows shells, yet!
+
 To run a local, non *kubernetes* development installation, you need these local accessible components:
 
  * [Docker](https://www.docker.com/get-started)
