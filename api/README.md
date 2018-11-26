@@ -28,16 +28,16 @@ pipenv shell
 ./setup.py develop
 ```
 
-Build example scanner in `templates/scanner/example`:
+Build example scanner:
 
 ```
-docker build -t backyard/scanner-example:latest .
+docker build -t backyard/scanner-example:latest templates/scanner/example
 ```
 
-Build example analyzer in `templates/analyzer/example`:
+Build example analyzer:
 
 ```
-docker build -t backyard/analyzer-example:latest .
+docker build -t backyard/analyzer-example:latest templates/analyzer/example
 ```
 
 ### Running the service
