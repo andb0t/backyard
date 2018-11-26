@@ -50,14 +50,14 @@ The _supervisor_ contains logic to start scanners and analyzers and sits right o
 _NATS_ to serve the requests. Start it using:
 
 ```
-backyard-supervisor
+pipenv run backyard-supervisor
 ```
 
 The _api_ server exposes the swagger defined API to an unencrypted local HTTP service. Make
 sure that this is i.e. proxied by an SSL enabled _nginx_ instance if made public.
 
 ```
-backyard-api
+pipenv run backyard-api
 ```
 
 You can now start the `EXAMPLE` analysis using the API (i.e. via the swagger interface).
