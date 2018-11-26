@@ -5,5 +5,5 @@ analyzer:
     Tests an analyzer with more depenendent scanners.
   image: "backyard/analyzer2:latest"
   scanners:
-  - HARVESTER
+  - THEHARVESTER
   - SPIDERFOOT

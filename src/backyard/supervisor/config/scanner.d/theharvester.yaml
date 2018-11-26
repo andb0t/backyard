@@ -1,0 +1,4 @@
+scanner:
+  name: "The Harvester"
+  id: "THEHARVESTER"
+  image: "backyard/scanner-theharvester:latest"
