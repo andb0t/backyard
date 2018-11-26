@@ -15,6 +15,11 @@ To run a local, non *kubernetes* development installation, you need these local 
 
 Start *NATS* via `gnatsd`. Run *MongoDB* using `mkdir -p /tmp/db && mongodb --dbpath /tmp/db`.
 
+or via Docker:
+`docker run -d --name db --publish 27017:27017 mongo`
+and
+`docker run -d --name msg --publish 4222:4222 --publish 6222:6222 --publish 8222:8222 nats`
+
 ### Initialize submodules
 ```
 git submodule init --update
