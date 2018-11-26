@@ -7,3 +7,6 @@
 [submodule "api/templates/analyzer/example/src/backyard/api/proto"]
 	path = api/templates/analyzer/example/src/backyard/api/proto
 	url = https://github.com/cyber-fighters/proto.git
+[submodule "api/templates/scanner/theharvester/src/backyard/api/proto"]
+	path = api/templates/scanner/theharvester/src/backyard/api/proto
+	url = git@github.com:cyber-fighters/proto.git
