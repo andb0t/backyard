@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-cd ..
-
 # run docker
 docker network create --driver bridge proto
 docker run -d --name db --network proto --publish 27017:27017 mongo

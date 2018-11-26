@@ -1,6 +1,9 @@
 #!/bin/bash
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
 sleep 5s
 
-curl msg:4222
-pipenv run python src/backyard/api
+curl localhost:4222
+
+nohup pipenv run python "$DIR"/../src/backyard/api &

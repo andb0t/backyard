@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-cd ..
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
+cd "$DIR" || exit
 
 # build containers
 docker build -t backyard/scanner-example:latest templates/scanner/example
