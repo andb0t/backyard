@@ -6,7 +6,7 @@ import subprocess
 def run(image, a_id, domain, paths=None):
     # TODO: Run docker image/kubernetes POD creation
     res = ""
-    if not paths is None:
+    if paths is not None:
         res = json.dumps(paths)
 
     subprocess.Popen(["docker", "run", "-v", "/tmp/data:/data", "--net=host", "-e",
