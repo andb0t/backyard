@@ -38,7 +38,7 @@ class Config:
             _scanners = analyzer.get('scanners')
             for scanner in _scanners:
                 if scanner in self._scanners:
-                   scanners.append(scanner)
+                    scanners.append(scanner)
                 else:
                     logging.warning('unknown scanner %s - skipping', scanner)
 

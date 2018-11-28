@@ -95,11 +95,11 @@ async def scan_status_handler(msg):
             # We're the last one so - tadaa, we're ready
             if len(scanners) == 0:
                 update['status'] = api.ANALYZING
-                logging.info("all scanners for %s are ready" % a_id)
+                logging.info("all scanners for %s are ready", a_id)
                 document['results'] = update['results']
                 start_analyzer(document)
             else:
-                logging.info('scanner %s for %s: %d%% completed' % (_scanner, a_id, req.completed))
+                logging.info('scanner %s for %s: %d%% completed', _scanner, a_id, req.completed)
 
             result = await collection.update_one({'id': a_id}, {'$set': update})
             if result is None:
@@ -121,7 +121,7 @@ async def scan_status_handler(msg):
 
             # TODO: handle errors (status ERROR, etc.)
 
-            logging.info('scanner %s for %s: %d%% completed' % (_scanner, a_id, req.completed))
+            logging.info('scanner %s for %s: %d%% completed', _scanner, a_id, req.completed)
 
     except Exception as e:
         logging.error(e)
@@ -158,7 +158,7 @@ async def analyzer_status_handler(msg):
                 logging.error('failed to update analyzer run')
                 return
 
-            logging.info('analyzer %s is ready: %s' % (_analyzer, req.path))
+            logging.info('analyzer %s is ready: %s', _analyzer, req.path)
 
         # ... not ready - update status
         else:
@@ -173,7 +173,7 @@ async def analyzer_status_handler(msg):
 
             # TODO: handle errors (status ERROR, etc.)
 
-            logging.info('analyzer %s for %s: %d%% completed' % (_analyzer, a_id, req.completed))
+            logging.info('analyzer %s for %s: %d%% completed', _analyzer, a_id, req.completed)
 
     except Exception as e:
         logging.error(e)
@@ -181,5 +181,5 @@ async def analyzer_status_handler(msg):
 
 
 def start_analyzer(dsc):
-    logging.info('starting analyzer image %s for domain %s' % (dsc['image'], dsc['domain']))
+    logging.info('starting analyzer image %s for domain %s', dsc['image'], dsc['domain'])
     pod.run(dsc['image'], dsc['id'], dsc['domain'], dsc['results'])

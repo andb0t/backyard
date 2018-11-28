@@ -19,7 +19,7 @@ async def start(a_id, scan, req):
     collection = db.scans
     res = await collection.count_documents({'$and': [{'domain': req.domain}, {'id': scan}]})
     if res == 0:
-        logging.info('starting scan %s for %s' % (scan, req.domain))
+        logging.info('starting scan %s for %s', scan, req.domain)
         pod.run(scanner['image'], a_id, req.domain)
 
         # Save this scan to the db for reference
@@ -33,10 +33,11 @@ async def start(a_id, scan, req):
         if result is None:
             return api.ERROR
     else:
-        logging.debug('scan %s for %s already exists - not starting another one' % (scan, req.domain))
+        logging.debug('scan %s for %s already exists - not starting another one', scan, req.domain)
 
     # If successful, create entry in mongodb
     return api.OK
+
 
 async def update(scanner, domain, req):
     collection = db.scans
