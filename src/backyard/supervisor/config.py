@@ -40,7 +40,7 @@ class Config:
                 if scanner in self._scanners:
                    scanners.append(scanner)
                 else:
-                    logging.warn('unknown scanner %s - skipping' % scanner)
+                    logging.warning('unknown scanner %s - skipping', scanner)
 
             self._analyzers.append({
                 'id': analyzer.get('id'),
