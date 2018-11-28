@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 import asyncio
-
-from backyard.api.rest.server import RestServer
 import logging
 from logging.config import dictConfig
+
 from nats.aio.client import Client as NATS
-from nats.aio.errors import ErrConnectionClosed, ErrTimeout, ErrNoServers
+from nats.aio.errors import ErrNoServers
+
+from backyard.api.rest.server import RestServer
+
 
 logging.basicConfig(level=logging.DEBUG)
 
