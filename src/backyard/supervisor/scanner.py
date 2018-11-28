@@ -9,7 +9,7 @@ from backyard.supervisor.mongo import db
 async def start(a_id, scan, req):
     scanners = config.Config.get_instance().get_scanners()
 
-    if not scan in scanners:
+    if scan not in scanners:
         logging.error('unknown scanner %s', scan)
         return api.ERROR
 
@@ -28,7 +28,7 @@ async def start(a_id, scan, req):
             'domain': req.domain,
             'progress': 0.0,
             'status': api.PENDING
-        }
+            }
         result = await collection.insert_one(document)
         if result is None:
             return api.ERROR
@@ -51,11 +51,11 @@ async def update(scanner, domain, req):
 
     else:
         # Update scanner information
-        u = {
+        upd = {
             'progress': req.completed,
             'status': req.status
-        }
+            }
 
-        result = await collection.update_one({'$and': [{'id': scanner}, {'domain': domain}]}, {'$set': u})
+        result = await collection.update_one({'$and': [{'id': scanner}, {'domain': domain}]}, {'$set': upd})
         if result is None:
             logging.error('failed to update scanner run')

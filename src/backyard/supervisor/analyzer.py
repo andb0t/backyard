@@ -25,10 +25,10 @@ async def start(req):
 
     a_id = str(uuid.uuid4())
 
-    p = os.path.join("/tmp", "data", req.domain)
-    if not os.path.exists(p):
-        os.makedirs(p)
-        os.chmod(p, 0o777)
+    tmp_path = os.path.join("/tmp", "data", req.domain)
+    if not os.path.exists(tmp_path):
+        os.makedirs(tmp_path)
+        os.chmod(tmp_path, 0o777)
 
     # Save this analyzer run to the db for reference
     collection = db.analyzer
@@ -42,7 +42,7 @@ async def start(req):
         'scanners': analyzer['scanners'],
         'results': {},
         'path': ''
-    }
+        }
     result = await collection.insert_one(document)
     if result is None:
         logging.error('failed to insert analyzer run')
@@ -52,7 +52,7 @@ async def start(req):
     for scan in analyzer['scanners']:
         res = await scanner.start(a_id, scan, req)
         if res != api.OK:
-            logging.error('failed to start scanner %s' % scan)
+            logging.error('failed to start scanner %s', scan)
             return "", api.ERROR
 
     # If successful, create entry in mongodb
@@ -77,7 +77,7 @@ async def scan_status_handler(msg):
         if document is None:
             logging.warning('unknown analysis - skipping')
             return
-        if not _scanner in document['scanners']:
+        if _scanner not in document['scanners']:
             logging.warning('invalid scanner for current analyzer')
             return
 
@@ -93,7 +93,7 @@ async def scan_status_handler(msg):
             update['results'][_scanner] = req.path
 
             # We're the last one so - tadaa, we're ready
-            if len(scanners) == 0:
+            if not scanners:
                 update['status'] = api.ANALYZING
                 logging.info("all scanners for %s are ready", a_id)
                 document['results'] = update['results']

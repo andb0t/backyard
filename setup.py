@@ -9,30 +9,30 @@ for path, dirs, files in os.walk("src/backyard/supervisor/config"):
         data_files.append(os.path.join(path[17:], f))
 
 setup(
-    name = "backyard.api",
-    version = "1.0",
-    author = "GONICUS GmbH",
-    author_email = "info@gonicus.de",
-    description = "",
+    name="backyard.api",
+    version="1.0",
+    author="GONICUS GmbH",
+    author_email="info@gonicus.de",
+    description="",
 
-    packages = find_packages('src', exclude=['examples', 'tests']),
+    packages=find_packages('src', exclude=['examples', 'tests']),
     package_dir={'': 'src'},
-    namespace_packages = ['backyard'],
+    namespace_packages=['backyard'],
 
-    include_package_data = True,
-    package_data = {
+    include_package_data=True,
+    package_data={
         'backyard.supervisor': data_files
-    },
+        },
 
-    zip_safe = False,
+    zip_safe=False,
 
-    setup_requires = [
+    setup_requires=[
         'pylint',
         ],
-    tests_require = [
+    tests_require=[
         'pytest',
-    ],
-    install_requires = [
+        ],
+    install_requires=[
         'protobuf',
         'asyncio-nats-client',
         'connexion',
@@ -45,9 +45,9 @@ setup(
         'colorlog'
         ],
 
-    entry_points = """
+    entry_points="""
         [console_scripts]
         backyard-api = backyard.api.__main__:main
         backyard-supervisor = backyard.supervisor.__main__:main
     """,
-)
+    )
