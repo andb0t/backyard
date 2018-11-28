@@ -69,9 +69,15 @@ You can now start the `EXAMPLE` analysis using the API (i.e. via the swagger int
 ## Adding scanners
 This needs to be streamlined! At the moment, these steps are necessary:
 * copy an example scanner `templates/scanner/example` and rename it from `example` to `YOUR_SCANNER`
+* renew the git submodule for proto:
+  ```
+  cd YOUR_SCANNER
+  rm -r src/backyard/api/proto
+  git submodule add git@github.com:cyber-fighters/proto.git src/backyard/api/proto
+  ```
 * add new config file in `src\backyard\supervisor\config\scanner.d`
 * configure analyzers in `src\backyard\supervisor\config\analyzer.d\*.yaml`
-* then change `templates\scanner\YOUR_SCANNER\src\backyard\scans\YOUR_SCANNER\__main__.py
+* then change `templates\scanner\YOUR_SCANNER\src\backyard\scans\YOUR_SCANNER\__main__.py`
 
 ## Exploring the API
 Default credentials: admin/secret
