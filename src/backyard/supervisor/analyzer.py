@@ -1,7 +1,8 @@
+import logging
+import os
 import traceback
 import uuid
-import os
-import logging
+
 import backyard.supervisor.config as config
 import backyard.supervisor.pod as pod
 import backyard.api.proto.api_pb2 as api

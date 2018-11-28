@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
-import sys
+import asyncio
+import logging
 import signal
+import sys
 import traceback
+from logging.config import dictConfig
+
+from nats.aio.errors import ErrNoServers
 
 import backyard.api.proto.api_pb2 as api
 import backyard.supervisor.config as config
 from backyard.supervisor.nats import nc
 import backyard.supervisor.analyzer as analyzer
-import asyncio
-import logging
-from logging.config import dictConfig
-from nats.aio.errors import ErrNoServers
+
 
 logging.basicConfig(level=logging.DEBUG)
 

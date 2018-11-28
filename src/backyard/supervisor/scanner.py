@@ -1,6 +1,7 @@
 import logging
-import backyard.supervisor.config as config
-import backyard.supervisor.pod as pod
+
+from backyard.supervisor import config
+from backyard.supervisor import pod
 import backyard.api.proto.api_pb2 as api
 from backyard.supervisor.mongo import db
 

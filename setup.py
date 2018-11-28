@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-from setuptools import setup, find_packages
 import os
+from setuptools import setup, find_packages
+
 
 data_files = []
 for path, dirs, files in os.walk("src/backyard/supervisor/config"):

@@ -2,9 +2,12 @@ import asyncio
 import os
 import time
 import random
-import backyard.api.proto.api_pb2 as api
+
 from nats.aio.client import Client as NATS
 from nats.aio.errors import ErrNoServers
+
+import backyard.api.proto.api_pb2 as api
+
 
 nc = NATS()
 

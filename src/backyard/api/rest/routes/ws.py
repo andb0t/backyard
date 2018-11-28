@@ -1,10 +1,12 @@
 import json
+import logging
 
 import aiohttp
 from aiohttp import web, WSMsgType
-import logging
-from backyard.api.__main__ import nc
 from google.protobuf.json_format import MessageToJson
+
+from backyard.api.__main__ import nc
+
 
 logger = logging.getLogger(__name__)
 

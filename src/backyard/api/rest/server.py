@@ -1,5 +1,6 @@
-import connexion
 import logging
+
+import connexion
 
 
 class RestServer:

@@ -1,14 +1,16 @@
 import logging
-
-import backyard.api.proto.api_pb2 as api
 import os
+
 from aiohttp import web
-from backyard.api import utils
-from backyard.api.__main__ import nc
+from bson.json_util import dumps
 from google.protobuf.json_format import MessageToJson
 from nats.aio.errors import ErrTimeout
+
+import backyard.api.proto.api_pb2 as api
+from backyard.api import utils
+from backyard.api.__main__ import nc
 from backyard.supervisor.mongo import db
-from bson.json_util import dumps
+
 
 logger = logging.getLogger(__name__)
 

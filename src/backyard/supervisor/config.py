@@ -1,7 +1,9 @@
 import os
-import pkg_resources
 import logging
+
 from yaml import load
+
+import pkg_resources
 
 
 class Config:

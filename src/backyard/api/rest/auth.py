@@ -1,5 +1,3 @@
-
-
 def check_auth(username: str, password: str):
     '''This function is called to check if a username /
     password combination is valid.'''
