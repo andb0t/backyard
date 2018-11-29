@@ -8,6 +8,7 @@ venv
 api/build
 *egg*
 .env
+db
 
 # server
 nohup.out
