@@ -39,6 +39,7 @@ Build example scanner:
 
 ```
 docker build -t backyard/scanner-example:latest templates/scanner/example
+docker build -t backyard/scanner-theharvester:latest templates/scanner/theharvester
 ```
 
 Build example analyzer:
