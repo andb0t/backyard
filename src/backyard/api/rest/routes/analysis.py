@@ -85,7 +85,7 @@ async def read(id):  # noqa: E501
     if document is None:
         raise web.HTTPNotFound(reason='Analysis not found')
 
-    return web.Response(text=dumps, content_type="application/json")
+    return web.Response(text=dumps(document), content_type="application/json")
 
 
 async def list_analyses():
@@ -95,7 +95,7 @@ async def list_analyses():
     for a in await cursor.to_list(length=100):
         result.append(a)
 
-    return web.Response(text=dumps, content_type="application/json")
+    return web.Response(text=dumps(result), content_type="application/json")
 
 
 async def read_result(request_ctx, id):  # noqa: E501
