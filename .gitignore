@@ -1,5 +1,6 @@
 # Python
 __pycache__
+Pipfile.lock
 
 # Project
 scans/*/download
@@ -12,3 +13,4 @@ db
 
 # server
 nohup.out
+
