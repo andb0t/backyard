@@ -10,3 +10,6 @@
 [submodule "templates/scanner/theharvester/src/backyard/api/proto"]
 	path = templates/scanner/theharvester/src/backyard/api/proto
 	url = git@github.com:cyber-fighters/proto.git
+[submodule "templates/analyzer/data_statistics/src/backyard/api/proto"]
+	path = templates/analyzer/data_statistics/src/backyard/api/proto
+	url = git@github.com:cyber-fighters/proto.git

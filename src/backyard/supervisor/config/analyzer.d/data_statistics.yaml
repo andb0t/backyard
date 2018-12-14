@@ -1,0 +1,8 @@
+analyzer:
+  id: "DATA_STATISTICS"
+  name: "Data Statistics Analyzer"
+  description: |
+    The first real analyzer.
+  image: "backyard/analyzer-data_statistics:latest"
+  scanners:
+  - THEHARVESTER
