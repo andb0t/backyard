@@ -1,0 +1,8 @@
+analyzer:
+  id: "dummy"
+  name: "Dummy Analyzer"
+  description: |
+    Provide dummy output for parallel FE and BE development.
+  image: "backyard/analyzer-dummy:latest"
+  scanners:
+  - EXAMPLE

@@ -13,3 +13,6 @@
 [submodule "modules/analyzer/data_statistics/src/backyard/api/proto"]
 	path = modules/analyzer/data_statistics/src/backyard/api/proto
 	url = git@github.com:cyber-fighters/proto.git
+[submodule "modules/analyzer/dummy/src/backyard/api/proto"]
+	path = modules/analyzer/dummy/src/backyard/api/proto
+	url = git@github.com:cyber-fighters/proto.git
