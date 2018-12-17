@@ -1,1 +1,3 @@
-scanner example template
+# example
+
+This should describe what the module does.

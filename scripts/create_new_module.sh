@@ -52,6 +52,7 @@ sed -i 's/'$MODULE'-example/'$MODULE'-'$MODULE_NAME'/g' "$NEW_FILE"
 echo "docker build -t backyard/$MODULE-$MODULE_NAME:latest $TARGET_DIR" >> "$SCRIPT_DIR"/build_containers.sh
 sed -i 's/backyard.module.example/backyard.module.'$MODULE_NAME'/g' "$TARGET_DIR"/Dockerfile
 sed -i 's/backyard.module.example/backyard.module.'$MODULE_NAME'/g' "$TARGET_DIR"/setup.py
+sed -i 's/# example/# '$MODULE_NAME'/g' "$TARGET_DIR"/README.md
 
 echo "Manual steps:"
 echo " - modify $NEW_FILE to represent the new $MODULE and its dependencies"
