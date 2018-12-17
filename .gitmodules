@@ -7,9 +7,9 @@
 [submodule "templates/analyzer/example/src/backyard/api/proto"]
 	path = templates/analyzer/example/src/backyard/api/proto
 	url = https://github.com/cyber-fighters/proto.git
-[submodule "templates/scanner/theharvester/src/backyard/api/proto"]
-	path = templates/scanner/theharvester/src/backyard/api/proto
+[submodule "modules/scanner/theharvester/src/backyard/api/proto"]
+	path = modules/scanner/theharvester/src/backyard/api/proto
 	url = git@github.com:cyber-fighters/proto.git
-[submodule "templates/analyzer/data_statistics/src/backyard/api/proto"]
-	path = templates/analyzer/data_statistics/src/backyard/api/proto
+[submodule "modules/analyzer/data_statistics/src/backyard/api/proto"]
+	path = modules/analyzer/data_statistics/src/backyard/api/proto
 	url = git@github.com:cyber-fighters/proto.git
