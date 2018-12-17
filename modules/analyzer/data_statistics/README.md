@@ -1,3 +1,3 @@
-# data_statistics
+# DATA_STATISTICS
 
 This should describe what the module does.

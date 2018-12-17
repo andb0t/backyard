@@ -1,1 +1,3 @@
-scanner theharvester template
+# THEHARVESTER
+
+This should describe what the module does.

@@ -21,19 +21,22 @@ else
 fi
 
 MODULE_NAME=""
+MODULE_NAME_UPPER=""
 if [ -z "$2" ]; then
     echo "No name supplied! What should the module be called?"
     echo "$INPUT_INFO"
     exit
 else
     MODULE_NAME="$2"
+    MODULE_NAME_UPPER=$(echo "$2" | awk '{print toupper($0)}')
 fi
 
 TARGET_DIR="modules/$MODULE/$MODULE_NAME"
 SOURCE_DIR="templates/$MODULE/example"
+MAINFILE="$TARGET_DIR/src/backyard/module/$MODULE_NAME/__main__.py"
 
 echo "Create new $MODULE module $MODULE_NAME in $TARGET_DIR ..."
-mkdir -p $TARGET_DIR
+mkdir -p "$TARGET_DIR"
 cp -r "$SOURCE_DIR"/* "$TARGET_DIR"
 
 echo "Rename files and folders ..."
@@ -52,8 +55,9 @@ sed -i 's/'$MODULE'-example/'$MODULE'-'$MODULE_NAME'/g' "$NEW_FILE"
 echo "docker build -t backyard/$MODULE-$MODULE_NAME:latest $TARGET_DIR" >> "$SCRIPT_DIR"/build_containers.sh
 sed -i 's/backyard.module.example/backyard.module.'$MODULE_NAME'/g' "$TARGET_DIR"/Dockerfile
 sed -i 's/backyard.module.example/backyard.module.'$MODULE_NAME'/g' "$TARGET_DIR"/setup.py
-sed -i 's/# example/# '$MODULE_NAME'/g' "$TARGET_DIR"/README.md
+sed -i 's/# EXAMPLE/# '$MODULE_NAME_UPPER'/g' "$TARGET_DIR"/README.md
+sed -i 's/EXAMPLE/'$MODULE_NAME_UPPER'/g' "$MAINFILE"
 
 echo "Manual steps:"
 echo " - modify $NEW_FILE to represent the new $MODULE and its dependencies"
-echo " - implement your new $MODULE in $TARGET_DIR/src/backyard/module/$MODULE_NAME/__main__.py"
+echo " - implement your new $MODULE in $MAINFILE"
