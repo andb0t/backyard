@@ -1,0 +1,51 @@
+{
+    "dashboard": {
+          "dataprotection_traffic_light": "red",
+          "infrastructure_traffic_light": "yellow",
+          "webapp_traffic_light": "red",
+          "assets": {
+              "unfixable_high_risk_vulns": 2,
+              "emergency_patches": 3,
+              "asset_score_chart": {
+                  "total": 123,
+                  "high": 0.15,
+                  "mid": 0.26,
+                  "low": 0.59,
+              },
+                "remediation_actions_chart": {
+                  "tot_patch": 119,
+                  "high_patch": 21,
+                  "tot_manual": 5,
+                  "high_manual": 4,
+                  "tot_no_fix": 6,
+                  "high_no_fix": 2,
+              }
+        },
+        "findings": {
+            "top_risky_software": {
+                "Microsoft/WindowsXP": {
+                    "number_of_assets": 13,
+                    "connected_assets": ["www.company_quick_and_dirty.com", "server2", "server0"]
+                },
+                "Microsoft/Windows2003": {
+                    "number_of_assets": 13,
+                    "connected_assets": ["www.company_quick_and_dirty.com", "server0"]
+                },
+                "Adobe/Flashplayer": {
+                    "number_of_assets": 13,
+                    "connected_assets": ["www.company_quick_and_dirty.com", "server3", "server1"]
+                },
+            },
+            "number_emails_organisation": 500,
+            "number_emails_compromised": 23,
+            "number_vulnerable_webapps": 10,
+            "number_vulnerable_devices": 5,
+            "finding_score_chart": {
+                "total": 259,
+                "high": 0.12,
+                "mid": 0.40,
+                "low": 0.48,
+            }
+        },
+    },
+}

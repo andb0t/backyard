@@ -10,7 +10,8 @@ RUN /venv/bin/pip install --upgrade pip && /venv/bin/pip install /project
 FROM base
 COPY --from=build /venv /venv
 COPY entrypoint.sh /entrypoint
-ENTRYPOINT ["sh", "/entrypoint"]
+COPY dummy_data.json /
+ENTRYPOINT ["sh", "/entrypoint", "dummy_data.json"]
 
 RUN adduser -D -u 9989 app
 USER app
