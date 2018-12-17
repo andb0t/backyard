@@ -31,18 +31,20 @@ cp -r "$SOURCE_DIR"/* "$TARGET_DIR"
 echo "Rename files and folders ..."
 mv "$TARGET_DIR"/src/backyard/module/example "$TARGET_DIR"/src/backyard/module/"$MODULE_NAME"
 
-# echo "Set up git submodule ..."
-# SUBMODULE_PATH="$TARGET_DIR/src/backyard/api/proto"
-# rm -r "$SUBMODULE_PATH"
-# git submodule add --force git@github.com:cyber-fighters/proto.git "$SUBMODULE_PATH"
+echo "Set up git submodule ..."
+SUBMODULE_PATH="$TARGET_DIR/src/backyard/api/proto"
+rm -r "$SUBMODULE_PATH"
+git submodule add --force git@github.com:cyber-fighters/proto.git "$SUBMODULE_PATH"
 
 echo "Register new $MODULE ..."
 NEW_FILE="src/backyard/supervisor/config/$MODULE.d/$MODULE_NAME.yaml"
 cp "src/backyard/supervisor/config/$MODULE.d/example.yaml" "$NEW_FILE"
 sed -i 's/id: "EXAMPLE"/id: "'$MODULE_NAME'"/g' "$NEW_FILE"
 sed -i 's/'$MODULE'-example/'$MODULE'-'$MODULE_NAME'/g' "$NEW_FILE"
+echo "docker build -t backyard/$MODULE-$MODULE_NAME:latest $TARGET_DIR" >> "$SCRIPT_DIR"/build_containers.sh
+sed -i 's/backyard.module.example/backyard.module.'$MODULE_NAME'/g' "$TARGET_DIR"/Dockerfile
+sed -i 's/backyard.module.example/backyard.module.'$MODULE_NAME'/g' "$TARGET_DIR"/setup.py
 
 echo "Manual steps:"
 echo " - modify $NEW_FILE to represent the new $MODULE and its dependencies"
 echo " - implement your new $MODULE in $TARGET_DIR/src/backyard/module/$MODULE_NAME/__main__.py"
-echo " - build the module: docker build -t backyard/$MODULE-$MODULE_NAME:latest $TARGET_DIR"
