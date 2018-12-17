@@ -46,7 +46,7 @@ Build example analyzer:
 
 ```
 docker build -t backyard/analyzer-example:latest templates/analyzer/example
-docker build -t backyard/data_statistics-example:latest templates/data_statistics/example
+docker build -t backyard/data_statistics-example:latest templates/analyzer/data_statistics
 ```
 
 ### Running the service
