@@ -15,9 +15,9 @@ async def run(loop):
     analyzer_id = os.environ['ANALYZER']
     domain = os.environ['DOMAIN']
     scans = json.loads(os.environ['SCANS'])
-    id = 'EXAMPLE'
+    module_id = 'DUMMY'
     folder = '/data/%s' % domain
-    status_topic = 'analyzer.%s.status' % id
+    status_topic = 'analyzer.%s.status' % module_id
 
     # Connect to nats
     try:
