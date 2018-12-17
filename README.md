@@ -35,18 +35,10 @@ pipenv shell
 ./setup.py develop
 ```
 
-Build example scanner:
+Build scanners and analyzers with:
 
 ```
-docker build -t backyard/scanner-example:latest templates/scanner/example
-docker build -t backyard/scanner-theharvester:latest templates/scanner/theharvester
-```
-
-Build example analyzer:
-
-```
-docker build -t backyard/analyzer-example:latest templates/analyzer/example
-docker build -t backyard/analyzer-data_statistics:latest templates/analyzer/data_statistics
+./scripts/build_containers.sh
 ```
 
 ### Running the service
@@ -69,17 +61,9 @@ You can now start the `EXAMPLE` analysis using the API (i.e. via the swagger int
 
 
 ## Adding scanners
-This needs to be streamlined! At the moment, these steps are necessary:
-* copy an example scanner `templates/scanner/example` and rename it from `example` to `YOUR_SCANNER`
-* renew the git submodule for proto:
-  ```
-  cd YOUR_SCANNER
-  rm -r src/backyard/api/proto
-  git submodule add git@github.com:cyber-fighters/proto.git src/backyard/api/proto
-  ```
-* add new config file in `src\backyard\supervisor\config\scanner.d`
-* configure analyzers in `src\backyard\supervisor\config\analyzer.d\*.yaml`
-* then change `templates\scanner\YOUR_SCANNER\src\backyard\scans\YOUR_SCANNER\__main__.py`
+```
+./scripts/create_new_module.sh [analyzer, scanner] YOUR_MODULE_NAME
+```
 
 ## Exploring the API
 Default credentials: admin/secret
