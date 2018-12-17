@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="backyard.analyzer.example",
+    name="backyard.module.example",
     version="1.0",
     author="GONICUS GmbH",
     author_email="info@gonicus.de",
@@ -31,6 +31,6 @@ setup(
 
     entry_points="""
         [console_scripts]
-        analyzer-example = backyard.analyzer.example.__main__:main
+        analyzer-example = backyard.module.example.__main__:main
     """,
     )

@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="backyard.analyzer.data_statistics",
+    name="backyard.module.data_statistics",
     version="1.0",
     author="GONICUS GmbH",
     author_email="info@gonicus.de",
@@ -31,6 +31,6 @@ setup(
 
     entry_points="""
         [console_scripts]
-        analyzer-data_statistics = backyard.analyzer.data_statistics.__main__:main
+        analyzer-data_statistics = backyard.module.data_statistics.__main__:main
     """,
     )

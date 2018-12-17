@@ -16,4 +16,4 @@ RUN adduser -D -u 9989 app
 USER app
 ENV PYTHONDONTWRITEBYTECODE=x
 
-CMD ["/venv/bin/python3", "-m", "backyard.scans.theharvester"]
+CMD ["/venv/bin/python3", "-m", "backyard.module.theharvester"]

@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(
-    name="backyard.scans.example",
+    name="backyard.module.example",
     version="1.0",
     author="GONICUS GmbH",
     author_email="info@gonicus.de",
@@ -32,6 +32,6 @@ setup(
 
     entry_points="""
         [console_scripts]
-        scanner-example = backyard.scans.example.__main__:main
+        scanner-example = backyard.module.example.__main__:main
     """,
     )
