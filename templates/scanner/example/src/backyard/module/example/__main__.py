@@ -29,7 +29,7 @@ async def run(loop):
         print('Error: %s' % e)
 
     # start the dummy process
-    runtime = 60
+    runtime = 30
     now = 0
 
     try:
