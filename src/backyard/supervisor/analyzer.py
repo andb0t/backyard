@@ -75,7 +75,7 @@ async def scan_status_handler(msg):
 
         # Valid scanner?
         if document is None:
-            logging.warning('unknown analysis - skipping')
+            logging.warning('unknown scanner - skipping')
             return
         if _scanner not in document['scanners']:
             logging.warning('invalid scanner for current analyzer')
