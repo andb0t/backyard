@@ -4,18 +4,26 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 cd "$SCRIPT_DIR/.."
 
 MODULE=""
+INPUT_INFO="Usage: $0 [analyzer, scanner] YOUR_NAME"
+
 if [ -z "$1" ]; then
-    echo "No argument supplied! What module do you want to create?"
-    echo "[analyzer, scanner]"
+    echo "No argument supplied! $INPUT_INFO"
     exit
 else
-    MODULE="$1"
+    if [ "$1" == "scanner" ] || [ "$1" == "analyzer" ]; then
+      MODULE="$1"
+    else
+      echo "What module do you want to create?"
+      echo "$INPUT_INFO"
+      exit
+    fi
+
 fi
 
 MODULE_NAME=""
 if [ -z "$2" ]; then
     echo "No name supplied! What should the module be called?"
-    echo "[YOUR_NAME]"
+    echo "$INPUT_INFO"
     exit
 else
     MODULE_NAME="$2"
