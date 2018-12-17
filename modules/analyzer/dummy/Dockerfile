@@ -11,8 +11,8 @@ RUN /venv/bin/pip install /project
 FROM base
 COPY --from=build /venv /venv
 COPY entrypoint.sh /entrypoint
-COPY dummy_data.json /
-ENTRYPOINT ["sh", "/entrypoint", "dummy_data.json"]
+COPY dummy_data.json /dummy_data.json
+ENTRYPOINT ["sh", "/entrypoint"]
 
 RUN adduser -D -u 9989 app
 USER app

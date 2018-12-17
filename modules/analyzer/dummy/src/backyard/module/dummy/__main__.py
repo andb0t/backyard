@@ -1,7 +1,6 @@
 import asyncio
 import json
 import os
-import sys
 
 from nats.aio.client import Client as NATS
 from nats.aio.errors import ErrNoServers
@@ -12,9 +11,10 @@ import backyard.api.proto.api_pb2 as api
 nc = NATS()
 
 
-async def run(loop, json_file):
+async def run(loop):
     analyzer_id = os.environ['ANALYZER']
     domain = os.environ['DOMAIN']
+    json_file = '/dummy_data.json'
     module_id = 'DUMMY'
     folder = '/data/%s' % domain
     status_topic = 'analyzer.%s.status' % module_id
@@ -37,8 +37,8 @@ async def run(loop, json_file):
 
     file = os.path.join(folder, 'result-%s.json' % analyzer_id)
 
-    with open(json_file, 'w') as f:
-        dummy_data = json.loads(f)
+    with open(json_file, 'r') as f:
+        dummy_data = json.load(f)
 
     with open(file, 'w') as f:
         f.write(json.dumps(dummy_data))
@@ -54,7 +54,7 @@ async def run(loop, json_file):
 def main():
     print('starting...')
     loop = asyncio.get_event_loop()
-    task = loop.create_task(run(loop, sys.argv[1]))
+    task = loop.create_task(run(loop))
     loop.run_until_complete(task)
     print('done')
 
