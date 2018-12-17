@@ -10,7 +10,7 @@
                   "total": 123,
                   "high": 0.15,
                   "mid": 0.26,
-                  "low": 0.59,
+                  "low": 0.59
               },
                 "remediation_actions_chart": {
                   "tot_patch": 119,
@@ -18,7 +18,7 @@
                   "tot_manual": 5,
                   "high_manual": 4,
                   "tot_no_fix": 6,
-                  "high_no_fix": 2,
+                  "high_no_fix": 2
               }
         },
         "findings": {
@@ -34,7 +34,7 @@
                 "Adobe/Flashplayer": {
                     "number_of_assets": 13,
                     "connected_assets": ["www.company_quick_and_dirty.com", "server3", "server1"]
-                },
+                }
             },
             "number_emails_organisation": 500,
             "number_emails_compromised": 23,
@@ -44,8 +44,8 @@
                 "total": 259,
                 "high": 0.12,
                 "mid": 0.40,
-                "low": 0.48,
+                "low": 0.48
             }
-        },
-    },
+        }
+    }
 }
