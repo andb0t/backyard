@@ -39,6 +39,8 @@ async def run(loop):
     for scanner_id, path in scans.items():
         with open(path) as f:
             aggregated_data[scanner_id] = f.read()
+    aggregated_data['analysis_info'] = 'This analysis is an example ' \
+        'and only shows the output of the dependent scanners!'
 
     file = os.path.join(folder, 'result-%s.json' % analyzer_id)
     with open(file, 'w') as f:
