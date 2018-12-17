@@ -45,7 +45,7 @@ mv "$TARGET_DIR"/src/backyard/module/example "$TARGET_DIR"/src/backyard/module/"
 echo "Set up git submodule ..."
 SUBMODULE_PATH="$TARGET_DIR/src/backyard/api/proto"
 rm -r "$SUBMODULE_PATH"
-git submodule add --force git@github.com:cyber-fighters/proto.git "$SUBMODULE_PATH"
+git submodule add --force https://github.com/cyber-fighters/proto.git "$SUBMODULE_PATH"
 
 echo "Register new $MODULE ..."
 NEW_FILE="src/backyard/supervisor/config/$MODULE.d/$MODULE_NAME.yaml"
