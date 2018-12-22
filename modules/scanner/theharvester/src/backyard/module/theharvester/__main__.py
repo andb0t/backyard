@@ -36,24 +36,31 @@ async def run(loop):
         status = api.JobStatus()
         status.id = analyzer_id
         status.status = api.SCANNING
-        while status.completed < 100:
-            wait_for = random.randint(1, 5)
-            now += wait_for
-            time.sleep(wait_for)
-            status.completed = min(100, round(100/runtime * now))
-            print('sending %s completed to nats topic: %s' % (status.completed, status_topic))
-            await nc.publish(status_topic, status.SerializeToString())
-            await nc.flush(0.500)
 
-        # save result and send the ScanCompleted message
+        print('sending %s completed to nats topic: %s' % (0, status_topic))
+        await nc.publish(status_topic, status.SerializeToString())
+        await nc.flush(0.500)
+
+        # save result and
         folder = '/data/%s' % domain
-        file = os.path.join(folder, '%s.json' % scanner_id)
-        with open(file, 'w') as f:
-            f.write('{"result": "this scanner does nothing"}')
+        file = '%s.html' % scanner_id
+        full_file = os.path.join(folder, file)
+        print('Saving to file %s' % full_file)
+        # define command
+        data_source = "bing"
+        _cmd = "cd {} && theharvester -d {} -b {} -f {}".format(folder, domain, data_source, file)
+        # run it
+        print("Executing: " + _cmd)
+        os.system(_cmd)
 
+        print('sending %s completed to nats topic: %s' % (100, status_topic))
+        await nc.publish(status_topic, status.SerializeToString())
+        await nc.flush(0.500)
+
+        # send the ScanCompleted message
         status.status = api.READY
         status.completed = 100
-        status.path = file
+        status.path = full_file
         await nc.publish(status_topic, status.SerializeToString())
         await nc.flush(0.500)
         await nc.drain()
