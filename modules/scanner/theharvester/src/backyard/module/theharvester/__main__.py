@@ -38,8 +38,8 @@ async def run(loop):
         status = api.JobStatus()
         status.id = analyzer_id
         status.status = api.SCANNING
-
-        print('sending %s completed to nats topic: %s' % (0, status_topic))
+        status.completed = 0
+        print('sending %s completed to nats topic: %s' % (status.completed, status_topic))
         await nc.publish(status_topic, status.SerializeToString())
         await nc.flush(0.500)
 
@@ -59,7 +59,8 @@ async def run(loop):
         print("Executing: " + _cmd)
         os.system(_cmd)
 
-        print('sending %s completed to nats topic: %s' % (50, status_topic))
+        status.completed = 50
+        print('sending %s completed to nats topic: %s' % (status.completed, status_topic))
         await nc.publish(status_topic, status.SerializeToString())
         await nc.flush(0.500)
 
@@ -88,7 +89,8 @@ async def run(loop):
         with open(json_file, 'w') as f:
             json.dump(result, f)
 
-        print('sending %s completed to nats topic: %s' % (100, status_topic))
+        status.completed = 100
+        print('sending %s completed to nats topic: %s' % (status.completed, status_topic))
         await nc.publish(status_topic, status.SerializeToString())
         await nc.flush(0.500)
 
