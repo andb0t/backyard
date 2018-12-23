@@ -1,7 +1,9 @@
 import asyncio
+import json
 import os
 import time
 import random
+from xml.etree import ElementTree
 
 from nats.aio.client import Client as NATS
 from nats.aio.errors import ErrNoServers
@@ -41,17 +43,50 @@ async def run(loop):
         await nc.publish(status_topic, status.SerializeToString())
         await nc.flush(0.500)
 
-        # save result and
-        folder = '/data/%s' % domain
-        file = '%s.html' % scanner_id
-        full_file = os.path.join(folder, file)
-        print('Saving to file %s' % full_file)
+        # define output paths
+        folder = '/data/' + domain
+        file_base = folder + '/' + scanner_id
+        html_file = file_base + '.html'
+        xml_file = file_base + '.xml'
+        json_file = file_base + '.json'
+        print('Saving to file {} and {}'.format(html_file, xml_file))
+
         # define command
         data_source = "bing"
-        _cmd = "cd {} && theharvester -d {} -b {} -f {}".format(folder, domain, data_source, file)
+        _cmd = "cd {} && theharvester -d {} -b {} -f {}".format(folder, domain, data_source, html_file)
+
         # run it
         print("Executing: " + _cmd)
         os.system(_cmd)
+
+        print('sending %s completed to nats topic: %s' % (50, status_topic))
+        await nc.publish(status_topic, status.SerializeToString())
+        await nc.flush(0.500)
+
+        # parse the output
+        search_strings = {'email': 'email',
+                          'host_name': 'host',
+                          'virtual_host_name': 'vhost',
+                          'tld': 'tld',
+                          'shodan': 'shodan'}
+        result = {key: [] for key in search_strings}
+
+        parsed_data = ElementTree.parse(xml_file)
+        for key, value in search_strings.items():
+            occurences = parsed_data.findall(value)
+            for occurence in occurences:
+                finding = occurence.text
+                if finding:
+                    result[key].append(finding)
+                else:
+                    ip_adr = occurence.find('ip').text
+                    host_name = occurence.find('hostname').text
+                    finding = {host_name: ip_adr}
+                    result[key].append(finding)
+
+        # save as json
+        with open(json_file, 'w') as f:
+            json.dump(result, f)
 
         print('sending %s completed to nats topic: %s' % (100, status_topic))
         await nc.publish(status_topic, status.SerializeToString())
@@ -60,7 +95,7 @@ async def run(loop):
         # send the ScanCompleted message
         status.status = api.READY
         status.completed = 100
-        status.path = full_file
+        status.path = json_file
         await nc.publish(status_topic, status.SerializeToString())
         await nc.flush(0.500)
         await nc.drain()
