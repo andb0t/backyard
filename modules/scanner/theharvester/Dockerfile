@@ -1,7 +1,7 @@
 # FROM python:3.6-alpine as base
 FROM kalilinux/kali-linux-docker as base
-RUN apt update
-RUN apt install -y python3.6 python3-venv theharvester
+RUN apt-get update
+RUN apt-get install -y python3.6 python3-venv theharvester
 
 FROM base as build
 RUN /usr/bin/python3.6 -m venv /venv
