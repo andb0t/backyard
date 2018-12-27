@@ -113,7 +113,11 @@ def main():
     loop = asyncio.get_event_loop()
 
     for sig in (signal.SIGINT, signal.SIGTERM):
-        loop.add_signal_handler(sig, ask_exit)
+        try:
+            loop.add_signal_handler(sig, ask_exit)
+        except NotImplementedError:
+            if sys.platform != 'win32':
+                raise
 
     asyncio.async(run(loop))
     loop.run_forever()
