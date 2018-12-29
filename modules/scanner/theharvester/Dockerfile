@@ -18,5 +18,6 @@ COPY --from=build /venv /venv
 RUN adduser --disabled-password --gecos "" -u 9989 app
 USER app
 ENV PYTHONDONTWRITEBYTECODE=x
+ENV TZ=Europe/Berlin
 
 CMD ["/venv/bin/python3", "-m", "backyard.module.theharvester"]
