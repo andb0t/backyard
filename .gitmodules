@@ -16,3 +16,9 @@
 [submodule "modules/analyzer/dummy/src/backyard/api/proto"]
 	path = modules/analyzer/dummy/src/backyard/api/proto
 	url = https://github.com/cyber-fighters/proto.git
+[submodule "modules/scanner/wapiti/src/backyard/api/proto"]
+	path = modules/scanner/wapiti/src/backyard/api/proto
+	url = https://github.com/cyber-fighters/proto.git
+[submodule "modules/scanner/nmap/src/backyard/api/proto"]
+	path = modules/scanner/nmap/src/backyard/api/proto
+	url = https://github.com/cyber-fighters/proto.git

@@ -50,7 +50,8 @@ git submodule add --force https://github.com/cyber-fighters/proto.git "$SUBMODUL
 echo "Register new $MODULE ..."
 NEW_FILE="src/backyard/supervisor/config/$MODULE.d/$MODULE_NAME.yaml"
 cp "src/backyard/supervisor/config/$MODULE.d/example.yaml" "$NEW_FILE"
-sed -i 's/id: "EXAMPLE"/id: "'$MODULE_NAME'"/g' "$NEW_FILE"
+sed -i 's/id: "EXAMPLE"/id: "'$MODULE_NAME_UPPER'"/g' "$NEW_FILE"
+sed -i 's/name: "Example"/name: "'$MODULE_NAME'"/g' "$NEW_FILE"
 sed -i 's/'$MODULE'-example/'$MODULE'-'$MODULE_NAME'/g' "$NEW_FILE"
 echo "docker build -t backyard/$MODULE-$MODULE_NAME:latest $TARGET_DIR" >> "$SCRIPT_DIR"/build_containers.sh
 sed -i 's/backyard.module.example/backyard.module.'$MODULE_NAME'/g' "$TARGET_DIR"/Dockerfile
