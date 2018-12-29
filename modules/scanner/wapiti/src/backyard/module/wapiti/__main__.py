@@ -42,10 +42,6 @@ async def run(loop):
     except Exception as e:
         print('Error: %s' % e)
 
-    # start the dummy process
-    runtime = 30
-    now = 0
-
     try:
         status = api.JobStatus()
         status.id = analyzer_id
