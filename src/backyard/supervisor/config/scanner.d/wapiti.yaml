@@ -1,0 +1,4 @@
+scanner:
+  name: "Wapiti"
+  id: "WAPITI"
+  image: "backyard/scanner-wapiti:latest"
