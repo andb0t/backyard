@@ -54,6 +54,7 @@ sed -i 's/id: "EXAMPLE"/id: "'$MODULE_NAME_UPPER'"/g' "$NEW_FILE"
 sed -i 's/name: "Example"/name: "'$MODULE_NAME'"/g' "$NEW_FILE"
 sed -i 's/'$MODULE'-example/'$MODULE'-'$MODULE_NAME'/g' "$NEW_FILE"
 echo "docker build -t backyard/$MODULE-$MODULE_NAME:latest $TARGET_DIR" >> "$SCRIPT_DIR"/build_containers.sh
+echo "docker build -t backyard/$MODULE-$MODULE_NAME:latest $TARGET_DIR" >> "$SCRIPT_DIR"/build_containers.cmd
 sed -i 's/backyard.module.example/backyard.module.'$MODULE_NAME'/g' "$TARGET_DIR"/Dockerfile
 sed -i 's/backyard.module.example/backyard.module.'$MODULE_NAME'/g' "$TARGET_DIR"/setup.py
 sed -i 's/# EXAMPLE/# '$MODULE_NAME_UPPER'/g' "$TARGET_DIR"/README.md
