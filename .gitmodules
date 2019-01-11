@@ -16,3 +16,6 @@
 [submodule "modules/analyzer/dummy/src/backyard/api/proto"]
 	path = modules/analyzer/dummy/src/backyard/api/proto
 	url = https://github.com/cyber-fighters/proto.git
+[submodule "modules/scanner/arachni/src/backyard/api/proto"]
+	path = modules/scanner/arachni/src/backyard/api/proto
+	url = https://github.com/cyber-fighters/proto.git

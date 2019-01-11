@@ -1,0 +1,4 @@
+scanner:
+  name: "arachni"
+  id: "ARACHNI"
+  image: "backyard/scanner-arachni:latest"
