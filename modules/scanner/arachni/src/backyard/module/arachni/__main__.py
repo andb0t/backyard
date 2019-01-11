@@ -2,6 +2,7 @@ import asyncio
 import os
 import time
 import random
+import json
 
 from nats.aio.client import Client as NATS
 from nats.aio.errors import ErrNoServers
@@ -28,32 +29,42 @@ async def run(loop):
     except Exception as e:
         print('Error: %s' % e)
 
-    # start the dummy process
-    runtime = 30
-    now = 0
-
     try:
         status = api.JobStatus()
         status.id = analyzer_id
         status.status = api.SCANNING
-        while status.completed < 100:
-            wait_for = random.randint(1, 5)
-            now += wait_for
-            time.sleep(wait_for)
-            status.completed = min(100, round(100/runtime * now))
-            print('sending %s completed to nats topic: %s' % (status.completed, status_topic))
-            await nc.publish(status_topic, status.SerializeToString())
-            await nc.flush(0.500)
+        await nc.publish(status_topic, status.SerializeToString())
+        await nc.flush(0.500)
 
-        # save result and send the ScanCompleted message
-        folder = '/data/%s' % domain
-        file = os.path.join(folder, '%s.json' % scanner_id)
-        with open(file, 'w') as f:
-            f.write('{"result": "this scanner does nothing"}')
+        # prerequisites
+        result_dir = '/result'
+        result_file = 'result.json'
+        result_path = '{}/{}'.format(result_dir, result_file)
+        if not os.path.exists(result_dir):
+            os.makedirs(result_dir)
+
+        folder = '/data/' + domain
+        file_base = folder + '/' + scanner_id
+        if not os.path.exists(file_base):
+            os.makedirs(file_base)
+        json_file = file_base + '.json'
+
+        # run scan
+        print('Running scan...')
+        os.system('arachni --scope-include-subdomains --output-only-positives {} --report-save-path=result.afr'.format(domain))
+        os.system('arachni_reporter result.afr --reporter=json:outfile={}'.format(result_path))
+
+        with open(result_path, 'r+') as f:
+            data = json.load(f)
+            #TODO: further modifications
+
+        print('Saving to file {}'.format(json_file))
+        with open(json_file, 'w') as f:
+            json.dump(data, f)
 
         status.status = api.READY
         status.completed = 100
-        status.path = file
+        status.path = json_file
         await nc.publish(status_topic, status.SerializeToString())
         await nc.flush(0.500)
         await nc.drain()
