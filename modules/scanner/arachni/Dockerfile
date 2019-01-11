@@ -1,6 +1,8 @@
 FROM kalilinux/kali-linux-docker as base
+RUN apt-get update
 RUN apt-get update --fix-missing
-RUN apt-get install -y python3.6 python3-venv arachni
+RUN apt-get install -y python3.6 python3-venv
+RUN apt-get install -y arachni
 
 FROM base as build
 RUN /usr/bin/python3.6 -m venv /venv
