@@ -5,8 +5,8 @@ from setuptools import setup, find_packages
 setup(
     name="backyard.module.arachni",
     version="1.0",
-    author="GONICUS GmbH",
-    author_email="info@gonicus.de",
+    author="Michael Lohr",
+    author_email="michael@lohr-ffb.de",
     description="",
 
     packages=find_packages('src', exclude=['examples', 'tests']),
