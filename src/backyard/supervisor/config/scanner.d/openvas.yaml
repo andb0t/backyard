@@ -1,0 +1,4 @@
+scanner:
+  name: "openvas"
+  id: "OPENVAS"
+  image: "backyard/scanner-openvas:latest"
